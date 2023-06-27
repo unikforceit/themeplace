@@ -87,6 +87,11 @@ if ( ! function_exists( 'themeplace_setup' ) ) :
     add_image_size( 'themeplace-370x280', 370,280, true );
     add_image_size( 'themeplace-100x100', 100,100, true );
     add_image_size( 'themeplace-80x80', 80,80, true );
+
+    add_theme_support('woocommerce' );
+    add_theme_support( 'wc-product-gallery-zoom' );
+    add_theme_support( 'wc-product-gallery-lightbox' );
+    add_theme_support( 'wc-product-gallery-slider' );
 	}
 endif;
 add_action( 'after_setup_theme', 'themeplace_setup' );
@@ -326,7 +331,7 @@ function themeplace_register_download_metafields() {
   $download = new_cmb2_box( array(
     'id'            => $prefix . 'metabox',
     'title'         => esc_html__( 'Download Options', 'themeplace' ),
-    'object_types'  => array( 'download')
+    'object_types'  => array( 'product')
   ) );
 
   $download->add_field( array(
@@ -1029,11 +1034,23 @@ function themeplace_menu_cart(){
 // Products archive post count
 function themeplace_services_archive_post_count( $query ) {
     global $themeplace_opt;
-  if ( ! is_admin() && is_post_type_archive( 'download' ) && $query->is_main_query() OR is_tax( 'download_category' ) OR is_tax( 'download_tag' )) {
+  if ( ! is_admin() && is_post_type_archive( 'product' ) && $query->is_main_query() OR is_tax( 'product_cat' ) OR is_tax( 'product_tag' )) {
       $query->set( 'posts_per_page', isset($themeplace_opt['themeplace_product_per_page']) ? $themeplace_opt['themeplace_product_per_page'] : 10 ); //set query arg ( key, value )
   }
 }
 add_action( 'pre_get_posts' ,'themeplace_services_archive_post_count', 1, 1 );
+
+function themeplace_shop_columns($columns) {
+    $columns = 2;
+    return $columns;
+}
+add_filter('loop_shop_columns', 'themeplace_shop_columns');
+
+function themeplace_add_to_cart_redirect($url) {
+    $url = wc_get_cart_url(); // Get the cart URL
+    return $url;
+}
+add_filter('woocommerce_add_to_cart_redirect', 'themeplace_add_to_cart_redirect');
 
 // Files included
 require_once get_template_directory() . '/inc/theme-option.php';

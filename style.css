@@ -4611,3 +4611,40 @@ div.bbp-submit-wrapper button {
         margin-bottom: 20px;
     }
 }
+/* CSS */
+.woocommerce nav.woocommerce-pagination ul,
+.woocommerce nav.woocommerce-pagination ul li {
+    border: none;
+    border-right: none;
+}
+.page-numbers:hover {
+    background: transparent !important;
+}
+.edd_download_purchase_form {
+    margin-bottom: 2em;
+}
+.form-row {
+    display: block;
+}
+.woocommerce form .form-row input.input-text,
+.woocommerce form .form-row textarea{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+table tr, table th, table td {
+    border: 1px solid #f9f9f9;
+    padding: 10px 15px;
+}
+#add_payment_method .wc-proceed-to-checkout a.checkout-button,
+.woocommerce-cart .wc-proceed-to-checkout a.checkout-button,
+.woocommerce-checkout .wc-proceed-to-checkout a.checkout-button,
+.woocommerce #payment #place_order, .woocommerce-page #payment #place_order{
+    padding: 15px 50px;
+    border: none;
+    font-size: 16px;
+    border-radius: 50px;
+    color: #fff !important;
+    background: #0674EC!important;
+}
