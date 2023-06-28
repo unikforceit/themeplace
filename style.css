@@ -4637,9 +4637,16 @@ table tr, table th, table td {
     border: 1px solid #f9f9f9;
     padding: 10px 15px;
 }
+p.woocommerce-mini-cart__buttons.buttons {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 20px 25px;
+}
 #add_payment_method .wc-proceed-to-checkout a.checkout-button,
 .woocommerce-cart .wc-proceed-to-checkout a.checkout-button,
 .woocommerce-checkout .wc-proceed-to-checkout a.checkout-button,
+.woocommerce-mini-cart__buttons a,
 .woocommerce #payment #place_order, .woocommerce-page #payment #place_order{
     padding: 15px 50px;
     border: none;

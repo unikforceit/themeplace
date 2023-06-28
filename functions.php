@@ -985,50 +985,19 @@ add_action( 'wp_ajax_nopriv_themeplace_menu_ajax','themeplace_menu_ajax');
 
 // Displays the cart in menu
 function themeplace_menu_cart(){ 
-	if( !themeplace_check_edd_exists() ){ return; } ?>
+	if( class_exists('WooCommerce') ){
+    $cart_count = WC()->cart->get_cart_contents_count();
+    $checkout_url = wc_get_checkout_url();
+    $cart_subtotal = WC()->cart->subtotal;
+    ?>
     <div class="menu-cart">
-      <a href="#"><i class="fa fa-cart-plus"></i><?php echo edd_get_cart_quantity(); ?></a>
+      <a href="#"><i class="fa fa-cart-plus"></i><?php echo $cart_count; ?></a>
 
       <div class="menu-cart-widget">
-        <ul class="menu-cart-product-list">
-          <?php $cartContents=edd_get_cart_contents();                    
-          if( $cartContents ){
-            foreach ($cartContents as $cartContentsKey => $cartContentsValue) { ?>
-              <li class="menu-cart-product-item">
-                <a href="<?php echo esc_url( get_permalink( $cartContentsValue['id'] ) ) ?>">
-                  <?php if ( get_post_meta( $cartContentsValue['id'], 'product_item_thumbnail', 1 ) ){ ?>
-                    <img src="<?php echo esc_url( get_post_meta( $cartContentsValue['id'], 'product_item_thumbnail', 1 ) ) ?>" alt="<?php echo esc_attr( get_post( $cartContentsValue['id'] )->post_title ) ?>">
-                  <?php } else {
-                    the_post_thumbnail( 'themeplace-80x80' );
-                  } ?>
-                  <p><?php echo esc_html( get_post( $cartContentsValue['id'] )->post_title ); ?></p>
-                  <span class="quantity">
-                    <?php echo esc_html($cartContentsValue['quantity']).__( ' x ' , 'themeplace' ) ?>
-                    <span class="amount">
-                        <?php echo edd_currency_filter( edd_format_amount( edd_get_download_price( $cartContentsValue['id'] ) ) ); ?>
-                    </span>
-                  </span>
-                </a>
-                <a href="<?php echo esc_url( wp_nonce_url( edd_remove_item_url( $cartContentsKey ), 'edd-remove-from-cart-'.$cartContentsKey, 'edd_remove_from_cart_nonce' ) )?>">
-                  <i class="fa fa-times-circle-o" aria-hidden="true"></i>
-                </a>
-              </li>
-          <?php } ?>
-              <li class="menu-cart-total">
-                <h5><strong><?php echo esc_html__( 'Total: ','themeplace' )?> </strong> <?php echo edd_currency_filter( edd_format_amount( edd_get_cart_total() ) ) ?></h5>
-                    <a href="<?php echo edd_get_checkout_uri() ?>"><?php echo esc_html__( 'Checkout','themeplace' )?></a>
-              </li>
-        </ul>          
-      <?php } else { ?>
-        <li class="menu-empty-cart">
-            <i class="fa fa-shopping-cart"></i>
-            <h5><?php echo esc_html__('Your cart is empty!','themeplace') ?></h5>
-        </li>
-      <?php } ?>
-
+        <?php woocommerce_mini_cart();?>
     </div>
   </div>
-    <?php
+    <?php }
 }
 
 // Products archive post count
