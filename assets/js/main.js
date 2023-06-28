@@ -118,6 +118,18 @@
         slidesToScroll: 1,
         accessibility: false,
     });
+    $('.product-gallery .slider').slick({
+        dots: true,
+        arrows: true,
+        infinite: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        slidesToShow: 3, // Number of slides to show at a time
+        slidesToScroll: 1, // Number of slides to scroll at a time
+        variableWidth: true, // Enable variable width for slides
+        centerMode: true, // Enable center mode
+        centerPadding: '20px', // Gap between slides
+    });
 
     // Popup Video
     $('.themeplace-popup-video,.themeplace-popup-url').magnificPopup({

@@ -73,7 +73,25 @@ $themeplace_features_group = get_post_meta(get_the_ID(), 'themeplace_features_gr
 
                     <?php else: ?>
 
-                        <?php the_post_thumbnail('full', array('class' => 'img-fluid')); ?>
+                        <?php the_post_thumbnail('full', array('class' => 'img-fluid'));
+
+                        // Check if product has gallery images
+                                if ($product->get_gallery_image_ids()) {
+                                $image_ids = $product->get_gallery_image_ids();
+                                ?>
+                                <div class="product-gallery">
+                                    <div class="slider">
+                                        <?php
+                                        // Loop through gallery images
+                                        foreach ($image_ids as $image_id) {
+                                            echo '<div>' . wp_get_attachment_image($image_id, [150]) . '</div>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        ?>
 
                     <?php endif ?>
                 </div>

@@ -4655,3 +4655,19 @@ p.woocommerce-mini-cart__buttons.buttons {
     color: #fff !important;
     background: #0674EC!important;
 }
+
+.menu-cart-product-item img {
+    width: 100%;
+    height: auto;
+}
+.remove_from_cart_button {
+    position: absolute;
+    right: 20px;
+}
+.menu-cart-product-item {
+    position: relative;
+}
+
+.product-gallery {
+    margin-top: 20px;
+}
